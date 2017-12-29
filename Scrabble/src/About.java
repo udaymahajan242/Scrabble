@@ -8,16 +8,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class About extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	JLabel lblVersion;
-	JLabel lblWrittenBy;
-	JLabel lblElanaHummel;
-	JLabel lblEthanCheatham;
-	JLabel lblTonyLauricella;
 	JLabel lblUdayMahajan;
 
 	/**
@@ -25,47 +22,33 @@ public class About extends JDialog {
 	 */
 	public About(String version) {
 		setTitle("About Deployment");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 523, 413);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		lblVersion = new JLabel("Version " + version);
-		lblVersion.setBounds(10, 36, 108, 14);
+		lblVersion.setBounds(207, 81, 196, 14);
 		contentPanel.add(lblVersion);
 		
-		lblWrittenBy = new JLabel("Writers:");
-		lblWrittenBy.setBounds(10, 95, 94, 14);
-		contentPanel.add(lblWrittenBy);
-		
-		lblElanaHummel = new JLabel("Elana Hummel");
-		lblElanaHummel.setBounds(10, 120, 94, 14);
-		contentPanel.add(lblElanaHummel);
-		
-		lblEthanCheatham = new JLabel("Ethan Cheatham");
-		lblEthanCheatham.setBounds(10, 142, 94, 14);
-		contentPanel.add(lblEthanCheatham);
-		
-		lblTonyLauricella = new JLabel("Tony Lauricella");
-		lblTonyLauricella.setBounds(10, 167, 94, 14);
-		contentPanel.add(lblTonyLauricella);
-		
-		lblUdayMahajan = new JLabel("Uday Mahajan");
-		lblUdayMahajan.setBounds(10, 192, 94, 14);
+		lblUdayMahajan = new JLabel("© Uday Mahajan");
+		lblUdayMahajan.setFont(new Font("Tahoma", Font.BOLD, 26));
+		lblUdayMahajan.setBounds(161, 144, 238, 54);
 		contentPanel.add(lblUdayMahajan);
+		{
+			JButton okButton = new JButton("OK");
+			okButton.setBounds(242, 278, 53, 29);
+			contentPanel.add(okButton);
+			okButton.addActionListener(new OkButtonActionListener());
+			okButton.setActionCommand("OK");
+			getRootPane().setDefaultButton(okButton);
+		}
 		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new OkButtonActionListener());
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
 		}
 	}
 

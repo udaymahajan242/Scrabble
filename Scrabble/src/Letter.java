@@ -5,8 +5,8 @@ public class Letter {
 	private int letterValue;
 	private String display;
 	
-	public Letter(char letr, int value, String show) {
-		this.letter = letr;
+	public Letter(char ltr, int value, String show) {
+		this.letter = ltr;
 		this.letterValue = value;
 		this.display = show;
 	}
@@ -14,7 +14,6 @@ public class Letter {
 	public char getLetter() {
 		return this.letter;
 	}
-	
 	public int getLetterValue() {
 		return this.letterValue;
 	}	

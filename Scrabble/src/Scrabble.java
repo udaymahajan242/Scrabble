@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
 
 public class Scrabble {
+	
 	// have the data for two players stored
 	// two pouchArrays, boolean toggle between
 
@@ -64,7 +66,6 @@ public class Scrabble {
 	JMenu mnAction;
 	JMenuItem mntmRestart;
 	JMenuItem mntmEndGame;
-	private JLabel lblEndScreen;
 	JMenuBar menuBar;
 	Player currentPlayer = new Player();
 	Player playerOne = new Player();
@@ -131,15 +132,17 @@ public class Scrabble {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("SCRABBLE (Beta)");
+		frame.setTitle("Scrabble");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setBounds(10, 10, 739, 995);
-		frame.setLocation(dim.width / 2 - frame.getSize().width / 2,
-		        dim.height / 2 - frame.getSize().height / 2);
+		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setIconImage(new ImageIcon("/Icon.png").getImage());
+		String pathToFileOnDisk = "C:\\Users\\Uday Mahajan\\Documents\\ECLIPSE\\Scrabble\\Images\\Icon.png";
+		ImageIcon img = new ImageIcon(pathToFileOnDisk);
+		frame.setIconImage(img.getImage());
+
 
 		JPanel boardPanel = new JPanel();
 		boardPanel.setBounds(15, 26, 703, 700);
@@ -203,18 +206,12 @@ public class Scrabble {
 		lblCurrentTurn.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurrentTurn.setBounds(309, 847, 106, 14);
 		frame.getContentPane().add(lblCurrentTurn);
-
-		lblEndScreen = new JLabel("");
-		ImageIcon Image2 = new ImageIcon(
-		        this.getClass().getResource("endScreen.jpg"));
-		lblEndScreen.setIcon(Image2);
-		lblEndScreen.setBounds(12, 0, 655, 546);
-		frame.getContentPane().add(lblEndScreen);
-
+		String pathToEndScreenOnDisk = "C:\\Users\\Uday Mahajan\\Documents\\ECLIPSE\\Scrabble\\Images\\endScreen.jpg";
+		ImageIcon Image2 = new ImageIcon(pathToEndScreenOnDisk);
+		
 		panel = new JPanel();
 		panel.setBounds(105, 16, 10, 10);
 		frame.getContentPane().add(panel);
-		lblEndScreen.setVisible(false);
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -235,8 +232,7 @@ public class Scrabble {
 		mnAbout.addActionListener(new MntmAboutScrabbleActionListener());
 
 		mntmAboutScrabble = new JMenuItem("Info");
-		mntmAboutScrabble
-		        .addActionListener(new MntmAboutScrabbleActionListener());
+		mntmAboutScrabble.addActionListener(new MntmAboutScrabbleActionListener());
 		mntmAboutScrabble.setHorizontalAlignment(SwingConstants.CENTER);
 		mnAbout.add(mntmAboutScrabble);
 
@@ -254,8 +250,7 @@ public class Scrabble {
 				field[xPos][yPos].setEditable(false);
 				field[xPos][yPos].setVisible(true);
 				field[xPos][yPos].setHorizontalAlignment(JTextField.CENTER);
-				field[xPos][yPos].addMouseListener(
-				        new TextFieldActionListener(xPos, yPos));
+				field[xPos][yPos].addMouseListener(new TextFieldActionListener(xPos, yPos));
 				boardPanel.add(field[xPos][yPos]);
 			}
 		}
@@ -296,24 +291,17 @@ public class Scrabble {
 					gb.setBonusWord(xPos, yPos, 2);
 				}
 				// double letter
-				if ((xPos == 11 && yPos == 0) || (xPos == 3 && yPos == 0)
-				        || (xPos == 3 && yPos == 14)
-				        || (xPos == 11 && yPos == 14) ||
+				if ((xPos == 11 && yPos == 0) || (xPos == 3 && yPos == 0) || (xPos == 3 && yPos == 14)
+						|| (xPos == 11 && yPos == 14) ||
 						// the above 4 squares don't show up as 2L using only
 						// the below code -Tony
-				        ((xPos % 10 == 2 || yPos % 10 == 2)
-				                && ((yPos == yHalf - 1 || yPos == yHalf + 1)
-				                        || (xPos == xHalf - 1
-				                                || xPos == xHalf + 1)))
-				        || ((xPos == xHalf || yPos == yHalf)
-				                && (xPos == xHalf - xHalf / 2 - 1
-				                        || xPos == xHalf + xHalf / 2 + 1
-				                        || yPos == yHalf - yHalf / 2 - 1
-				                        || yPos == yHalf + yHalf / 2 + 1))
-				        || ((xPos == 0 || xPos == xDimension - 1)
-				                && (yPos == 3 || yPos == 11))
-				        || ((xPos == xHalf - 1 || xPos == xHalf + 1)
-				                && (yPos == yHalf - 1 || yPos == yHalf + 1))) {
+				((xPos % 10 == 2 || yPos % 10 == 2)
+						&& ((yPos == yHalf - 1 || yPos == yHalf + 1) || (xPos == xHalf - 1 || xPos == xHalf + 1)))
+						|| ((xPos == xHalf || yPos == yHalf)
+								&& (xPos == xHalf - xHalf / 2 - 1 || xPos == xHalf + xHalf / 2 + 1
+										|| yPos == yHalf - yHalf / 2 - 1 || yPos == yHalf + yHalf / 2 + 1))
+						|| ((xPos == 0 || xPos == xDimension - 1) && (yPos == 3 || yPos == 11))
+						|| ((xPos == xHalf - 1 || xPos == xHalf + 1) && (yPos == yHalf - 1 || yPos == yHalf + 1))) {
 					field[xPos][yPos].setBackground(Color.GREEN);
 					field[xPos][yPos].setText("2L");
 					gb.setBonusLetter(xPos, yPos, 2);
@@ -391,29 +379,28 @@ public class Scrabble {
 			if (letter.equals("")) {
 				JOptionPane.showMessageDialog(frame, "Please select a letter");
 			} else if (field[xPos][yPos].getBackground() == Color.LIGHT_GRAY) {
-				JOptionPane.showMessageDialog(frame,
-				        "Please put the letter in a different spot");
+				JOptionPane.showMessageDialog(frame, "Please put the letter in a different spot");
 			} else {
 				prevText.add(field[xPos][yPos].getText());
 				prevColor.add(field[xPos][yPos].getBackground());
+				// System.out.println(prevText + " " + prevColor.toString());
 
 				field[xPos][yPos].setText(letter);
 				field[xPos][yPos].setBackground(Color.LIGHT_GRAY);
-
-				gb.setSquareLetter(xPos, yPos,
-				        Letter.clone(currentPlayer.tray[place]));
-
+				// System.out.println(prevText + " " + prevColor.toString());
+				gb.setSquareLetter(xPos, yPos, Letter.clone(currentPlayer.tray[place]));
+				// System.out.println(gb.getSquareLetter(xPos + 1,
+				// yPos).getLetter());
 				trayField[place].setEnabled(false);
 
 				int bonusLetter = gb.getBonusLetter(xPos, yPos);
 				int bonusWord = gb.getBonusWord(xPos, yPos);
-				int letterValue = gb.getSquareLetter(xPos, yPos)
-				        .getLetterValue();
+				int letterValue = gb.getSquareLetter(xPos, yPos).getLetterValue();
 				letterValue *= bonusLetter;
-				WordLetter wl = new WordLetter(letter.substring(0, 1), xPos,
-				        yPos, letterValue, bonusWord);
+				WordLetter wl = new WordLetter(letter.substring(0, 1), xPos, yPos, letterValue, bonusWord);
 				word.add(wl);
-
+				// System.out.println(word.toString());
+				// System.out.println(letter.substring(0, 1));
 				letter = "";
 			}
 		}
@@ -445,15 +432,14 @@ public class Scrabble {
 			} else if (turn == 0 && field[7][7].getText().equals("2W")) {
 				// System.out.println("got there");
 				JOptionPane.showMessageDialog(frame,
-				        "First word of the game should have a letter on the middle square.");
+						"First word of the game should have a letter on the middle square.");
 				btnUndo.doClick();
 			} else if (wf.checkAlone(previous, gb)) {
 				JOptionPane.showMessageDialog(frame,
-				        "The word should use at least one letter previously on the board.");
+						"The word should use at least one letter previously on the board.");
 				btnUndo.doClick();
 			} else if (!check) {
-				JOptionPane.showMessageDialog(frame,
-				        "The word does not exist. Please try again!");
+				JOptionPane.showMessageDialog(frame, "The word does not exist. Please try again!");
 				btnUndo.doClick();
 			} else {
 				calculateScore(wf.possibleWords(previous, gb));
@@ -582,10 +568,8 @@ public class Scrabble {
 		public void actionPerformed(ActionEvent arg0) {
 			// subtract current player's remaining letters from their score
 			for (int i = 0; i < currentPlayer.tray.length; i++) {
-				if ((currentPlayer.tray[i] != null)
-				        || (Scrabble.trayField[i].isEnabled() == true)) {
-					currentPlayer.score -= currentPlayer.tray[i]
-					        .getLetterValue();
+				if ((currentPlayer.tray[i] != null) || (Scrabble.trayField[i].isEnabled() == true)) {
+					currentPlayer.score -= currentPlayer.tray[i].getLetterValue();
 				}
 			}
 
@@ -606,10 +590,8 @@ public class Scrabble {
 
 			// subtract other player's remaining letters from their score
 			for (int i = 0; i < currentPlayer.tray.length; i++) {
-				if ((currentPlayer.tray[i] != null)
-				        || (Scrabble.trayField[i].isEnabled() == true)) {
-					currentPlayer.score -= currentPlayer.tray[i]
-					        .getLetterValue();
+				if ((currentPlayer.tray[i] != null) || (Scrabble.trayField[i].isEnabled() == true)) {
+					currentPlayer.score -= currentPlayer.tray[i].getLetterValue();
 				}
 			}
 
@@ -630,21 +612,19 @@ public class Scrabble {
 			// show the winner
 			player1score = Integer.parseInt(txtPlayer1Score.getText());
 			player2score = Integer.parseInt(txtPlayer2Score.getText());
-			ImageIcon Image2 = new ImageIcon(
-			        this.getClass().getResource("endScreen.jpg"));
-
+			String pathToEndScreenOnDisk = "C:\\Users\\Uday Mahajan\\Documents\\ECLIPSE\\Scrabble\\Images\\endScreen.jpg";
+			ImageIcon Image2 = new ImageIcon(pathToEndScreenOnDisk);
+			
+			
 			if (player1score > player2score) {
-				JOptionPane.showMessageDialog(frame,
-				        "PLAYER 1 IS THE WINNERRRR!!!!!");
+				JOptionPane.showMessageDialog(frame, "PLAYER 1 IS THE WINNER!!!!!");
 			} else if (player2score > player1score) {
-				JOptionPane.showMessageDialog(frame,
-				        "PLAYER 2 IS THE WINNERRRR!!!!!");
+				JOptionPane.showMessageDialog(frame, "PLAYER 2 IS THE WINNEr!!!!!");
 			} else
 				JOptionPane.showMessageDialog(frame, "THE GAME IS A TIE!!!!!");
-
-			JOptionPane.showMessageDialog(null,
-			        new JLabel("", Image2, JLabel.CENTER), "Congratulations",
-			        JOptionPane.INFORMATION_MESSAGE);
+			
+			JOptionPane.showMessageDialog(null, new JLabel("", Image2, JLabel.CENTER), "Congratulations",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
